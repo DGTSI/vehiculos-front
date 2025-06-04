@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@style/index.scss' as s;
+
+html {
+    
+    @include s.media-tablet {
+        font-size: .9rem;
+    }
+    
+    @include s.media-desktop {
+        font-size: 1.1em;
+    }
+    
+    @include s.media-large-desktop {
+        font-size: 1.5rem;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: s.$metropolis-semi;
+}
+
+p, a, label, input, select, option, textarea, blockquote, a, ol, ul, table {
+    font-family: s.$metropolis-normal;
+}

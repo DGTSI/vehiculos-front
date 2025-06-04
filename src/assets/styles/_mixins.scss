@@ -1,0 +1,23 @@
+@mixin media-tablet {
+    @media (min-width: 721px) and (max-width: 1280px) {
+        @content;
+    }
+  }
+  
+  @mixin media-desktop {
+    @media (min-width: 1281px) and (max-width: 1920px) {
+        @content;
+    }
+  }
+  
+  @mixin media-large-desktop {
+    @media (min-width: 1921px) {
+        @content;
+    }
+  }
+  
+  @mixin media-resolution($resolution) {
+    @media (min-width: $resolution) {
+      @content;
+    }
+  }
