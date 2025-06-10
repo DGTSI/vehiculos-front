@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
-import { NavigationComponent } from "../../../features/components/navigation/navigation.component";
+import { Component, OnInit } from '@angular/core';
 import { FormUserComponent } from "../../../features/pages/form-user/form-user.component";
+import { HeaderComponent } from "../../../features/components/header/header.component";
+import { SweetAlert } from '@shared/utilities/sweetalert';
 
 @Component({
   selector: 'app-shell',
-  imports: [NavigationComponent, FormUserComponent],
+  imports: [
+    FormUserComponent,
+    HeaderComponent
+  ],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss'
 })
-export class ShellComponent {
+export class ShellComponent implements OnInit {
+  
+  ngOnInit(): void {
+    SweetAlert.textTitle("Texto Introductorio", 'Lorem Ipsum uiashfhiusaedbfuis<e');
+  }
 
 }

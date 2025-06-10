@@ -1,0 +1,51 @@
+@use 'sass:color';
+@use '@style/index.scss' as s;
+
+p {
+    font-family: s.$metropolis-semi;
+    font-size: .9rem;
+    max-width: 75%;
+    
+    @include s.media-resolution(721px) {
+        max-width: 100%;
+    }
+}
+
+.message {
+    border-radius: .3rem;
+    padding: .5rem 0;
+}
+
+.message-warn {
+    color: s.$svg-warn;
+    background-color: color.mix(s.$yellow, transparent, 60%);
+    border: 2px solid color.mix(s.$yellow, black, 80%);
+}
+
+.message-info {
+    color: s.$svg-info;
+    background-color: color.mix(s.$blue-acua, transparent, 60%);
+    border: 2px solid color.mix(s.$blue-acua, black, 80%);
+}
+
+.message-danger {
+    color: color.mix(s.$red-warngin, black, 60%);
+    background-color: color.mix(s.$red-warngin, transparent, 60%);
+    border: 2px solid color.mix(s.$red-warngin, black, 80%);
+}
+
+.close {
+    cursor: pointer;
+}
+
+.svg-warn {
+    stroke: s.$svg-warn;
+}
+
+.svg-info {
+    stroke: s.$svg-info;
+}
+
+.svg-danger {
+    stroke: s.$svg-danger;
+}

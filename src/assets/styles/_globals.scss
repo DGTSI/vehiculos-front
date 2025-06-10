@@ -3,7 +3,9 @@
 margin etc... (cambiando tamaños) no se sumen los pixeles */
 html{
     box-sizing: border-box;
-    *, *:before, *:after{
+    font-family: 'Metropolis-medium';
+
+    *, *:before, *:after {
       box-sizing: inherit;
     }
 
@@ -23,6 +25,8 @@ html{
     margin: 0rem;
     list-style: none;
   }
+
+  
 }
 
  /*Este codigo ayuda a reestablecer los valores de la unidad rem
@@ -38,4 +42,14 @@ html{
   html{
     scroll-snap-type: y mandatory; /*eje y*/
     scroll-snap-type: x mandatory; /*eje x*/
+  }
+
+  fieldset {
+    padding: 0;
+    margin: 0;
+  }
+
+  input::placeholder {
+    font-style: italic;
+    font-family: 'Metropolis-semibold';
   }

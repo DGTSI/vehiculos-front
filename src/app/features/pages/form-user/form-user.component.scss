@@ -1,0 +1,15 @@
+.form-user {
+    transition: all .3s ease;
+}
+
+.show {
+    transform: translateX(0%);
+}
+
+.hidde {
+    transform: translateX(-100%);
+}
+
+.message-send-data {
+    width: 95%;
+}

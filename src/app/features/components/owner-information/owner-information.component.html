@@ -1,0 +1,86 @@
+<form id="owner" class="m-auto my-4" 
+[formGroup]="form" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend class="text-center fw-semibold w-100">Datos del denunciante</legend>
+        
+        <div class="groups">
+            <div class="group name">
+                <label for="nombre">Nombre(s) *:</label>
+                <input type="text" id="nombre" placeholder="Nombre(s)" formControlName="nombre">
+            </div>
+        
+            <div class="group lastName1">
+                <label for="paterno">Apellido paterno *:</label>
+                <input type="text" id="paterno" placeholder="Apellido paterno" formControlName="paterno">
+            </div>
+        
+            <div class="group lastName2">
+                <label for="materno">Apellido materno *:</label>
+                <input type="text" id="materno" placeholder="Apellido materno" formControlName="materno">
+            </div>
+        
+            <div class="group curp">
+                <label for="curp">CURP *:</label>
+                <input type="text" id="curp" placeholder="CURP" formControlName="curp">
+            </div>
+        
+            <div class="group phone1">
+                <label for="telefono">Teléfono 1 *:</label>
+                <input type="text" id="telefono" placeholder="Teléfono 1" formControlName="telefono">
+            </div>
+        
+            <div class="group phone2">
+                <label for="celular">Teléfono 2 *:</label>
+                <input type="text" id="celular" placeholder="Teléfono 2" formControlName="celular">
+            </div>
+        
+            <div class="group email">
+                <label for="correoe">Correo electrónico *:</label>
+                <input type="text" id="correoe" placeholder="Correo electrónico" formControlName="correoe">
+            </div>
+        
+            <div class="group cp">
+                <label for="codigopostal">Código postal *:</label>
+                <input type="text" id="codigopostal" placeholder="Código postal" formControlName="codigopostal">
+            </div>
+        
+            <div class="group state">
+                <label for="estado">Estado *:</label>
+                <input type="text" id="estado" placeholder="Estado donde reside" formControlName="estado">
+            </div>
+        
+            <div class="group district">
+                <label for="colonia">Colonia *:</label>
+                <input type="text" id="colonia" placeholder="Colonia donde reside" formControlName="colonia">
+            </div>
+        
+            <div class="group municipality">
+                <label for="municipio">Delegación / Municipio *:</label>
+                <input type="text" id="municipio" placeholder="Delegación o Municipio" formControlName="municipio">
+            </div>
+        
+            <div class="group street">
+                <label for="calle">Calle *:</label>
+                <input type="text" id="calle" placeholder="Calle de su domicilio" formControlName="calle">
+            </div>
+        
+            <div class="group internal">
+                <label for="nointerior">Numero interior *:</label>
+                <input type="text" id="nointerior" placeholder="Numero interior" formControlName="nointerior">
+            </div>
+        
+            <div class="group external">
+                <label for="noexterior">Número exterior *:</label>
+                <input type="text" id="noexterior" placeholder="Número exterior" formControlName="noexterior">
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="buttons d-flex w-100">
+        <button class="btn" [ngClass]="isFormSubmit ? 'btn-block' : 'btn-outline-primary'" 
+        type="submit" [disabled]="isFormSubmit">
+            Contactar a Call Center
+        </button>
+    </div>
+</form>
+

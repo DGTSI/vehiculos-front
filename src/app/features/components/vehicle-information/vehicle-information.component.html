@@ -1,0 +1,41 @@
+<form class="m-auto my-4" 
+ [formGroup]="formVehicle" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend class="text-center fw-semibold w-100">Datos del vehículo</legend>
+
+        <div class="show-message text-center m-auto">
+            <app-small-message message="Ingrese un solo criterio de búsqueda*" type="info" />
+        </div>
+
+        <div class="groups">
+            
+            <div class="group">
+                <label for="folder">Carpeta de investigación:</label>
+                <input type="text" id="folder" placeholder="Carpeta de investigación"
+                formControlName="folder">
+            </div>
+
+            <div class="group">
+                <label for="plate">Placa del vehículo (sin guiones ni espacios) (5-7 digitos):</label>
+                <input type="text" id="plate" placeholder="Placa del vehículo"
+                formControlName="plate" (paste)="onPaste($event)" (input)="onInput($event)">
+            </div>
+        
+            <div class="group">
+                <label for="serial">Número de serie (NIV) (17 digitos):</label>
+                <input type="text" id="serial" placeholder="Número de serie del vehículo"
+                formControlName="serial" (paste)="onPaste($event)" (input)="onInput($event)">
+            </div>
+
+        </div>
+    </fieldset>
+
+    <!-- Botones -->
+    <div class="buttons d-flex justify-content-end w-100">
+        <button class="btn" [ngClass]="isDataOwner ? 'btn-block' : 'btn-outline-primary'"
+        type="submit" [disabled]="isDataOwner">
+            Verificar
+        </button>
+    </div>
+</form>
+
