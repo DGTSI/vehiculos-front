@@ -1,0 +1,63 @@
+<div 
+class="message justify-content-center align-items-center gap-2 px-3"
+[ngClass]="{
+    'd-none': hiddeAlert,
+    'd-inline-flex': !hiddeAlert,
+    'message-warn': type === 'warn',
+    'message-danger': type === 'danger',
+    'message-info': type === 'info',
+
+}">
+    @if(type === 'warn') {
+
+    <svg class="svg-warn" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="#ff9500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 9v4" />
+        <path
+            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" />
+        <path d="M12 16h.01" />
+    </svg>
+
+    } @else if (type === 'info') {
+
+        <svg
+        class="svg-info"
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 9h.01" />
+        <path d="M11 12h1v4h1" />
+        <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+      </svg>
+
+    } @else if(type === 'danger') {
+
+    <svg class="svg-danger" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+        <path d="M12 8v4" />
+        <path d="M12 16h.01" />
+    </svg>
+
+    }
+
+    <p>{{ message }}</p>
+
+    <svg (click)="onClose()" 
+    [ngClass]="{
+        'svg-warn': type === 'warn',
+        'svg-danger': type === 'danger',
+        'svg-info': type === 'info',
+    }" class="close" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6l-12 12" />
+        <path d="M6 6l12 12" />
+    </svg>
+
+</div>

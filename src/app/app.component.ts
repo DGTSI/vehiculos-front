@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ShellComponent } from './shell/layout/shell/shell.component';
 
 @Component({
@@ -11,5 +10,4 @@ import { ShellComponent } from './shell/layout/shell/shell.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'vehiculos-front';
 }

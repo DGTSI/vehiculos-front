@@ -1,0 +1,38 @@
+@use '@style/index.scss' as s;
+
+header {
+    width: 100%;
+    background: url(/img/banner.png);
+    padding: .5rem 2rem;
+
+    display: flex;
+    justify-content: center;
+    
+    @include s.media-tablet {
+        justify-content: start;
+
+        img {
+            width: 25% !important;
+        }
+    }
+
+    @include s.media-desktop {
+        justify-content: start;
+
+        img {
+            width: 15% !important;
+        }
+    }
+
+    @include s.media-large-desktop {
+        justify-content: start;
+
+        img {
+            width: 10% !important;
+        }
+    }
+
+    img {
+        width: 50%;
+    }
+}

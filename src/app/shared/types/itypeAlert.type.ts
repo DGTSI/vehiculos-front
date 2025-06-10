@@ -1,0 +1,1 @@
+export type IAlertType = 'warn' | 'success' | 'danger' | 'info';

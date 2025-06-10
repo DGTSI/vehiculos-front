@@ -1,17 +1,18 @@
 @use '@style/index.scss' as s;
 
 html {
+    font-size: 1.2rem;
     
     @include s.media-tablet {
-        font-size: .9rem;
+        font-size: .9em;
     }
     
     @include s.media-desktop {
-        font-size: 1.1em;
+        font-size: 1.1rem;
     }
     
     @include s.media-large-desktop {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
     }
 }
 
@@ -19,6 +20,59 @@ h1, h2, h3, h4, h5, h6 {
     font-family: s.$metropolis-semi;
 }
 
-p, a, label, input, select, option, textarea, blockquote, a, ol, ul, table {
+p, a, input, select, option, textarea, blockquote, a, ol, ul, table {
     font-family: s.$metropolis-normal;
+}
+
+label {
+    font-family: s.$metropolis-semi;
+}
+
+.btn-outline-primary {
+    font-family: s.$metropolis-semi !important;
+    background-color: white;
+    color: s.$primary !important;
+    border: 2px solid s.$primary !important;
+    transition: background-color .2s ease;
+    
+    &:hover {
+        background-color: s.$primary !important;
+        color: white !important;
+    }
+}
+
+.btn-block {
+    border-radius: none !important;
+    background-color: s.$gray !important;
+    cursor: no-drop !important;
+}
+
+.swal2-title {
+    @include s.media-tablet {
+        font-size: 1.3rem;
+    }
+    
+    @include s.media-desktop {
+        font-size: 1.1rem;
+    }
+    
+    @include s.media-large-desktop {
+        font-size: 1.1rem;
+    }
+}
+
+// .swal2-popup .swal2-modal .swal2-icon-warning .swal2-show {
+.swal2-popup  {
+    @include s.media-tablet {
+        width: 50% !important;
+    }
+    
+    @include s.media-desktop {
+        width: 30% !important;
+    }
+    
+    @include s.media-large-desktop {
+        width: 25% !important;
+    }
+    
 }
