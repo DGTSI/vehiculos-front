@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '@style/index.scss' as s;
 
 html {
@@ -16,28 +17,41 @@ html {
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: s.$metropolis-semi;
+body {
+    // background-color: s.$secondary-light;
+
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+    font-family: s.$font-title-bold;
 }
 
 p, a, input, select, option, textarea, blockquote, a, ol, ul, table {
-    font-family: s.$metropolis-normal;
+    font-family: s.$font-text-normal;
 }
 
 label {
-    font-family: s.$metropolis-semi;
+    font-family: s.$font-text-bold;
+}
+
+.btn-primary {
+    font-family: s.$font-text-bold !important;
+    background-color: s.$primary !important;
+
 }
 
 .btn-outline-primary {
-    font-family: s.$metropolis-semi !important;
+    font-family: s.$font-text-bold !important;
     background-color: white;
-    color: s.$primary !important;
-    border: 2px solid s.$primary !important;
+    border: 2px solid s.$boder-primary !important;
     transition: background-color .2s ease;
+    color: s.$boder-primary !important;
     
     &:hover {
-        background-color: s.$primary !important;
+        // background-color: s.$primary !important;
+        background-color: s.$green-light !important;
         color: white !important;
+        // color: s.$primary !important;
     }
 }
 
@@ -76,3 +90,46 @@ label {
     }
     
 }
+
+// body {
+//     &::after {
+//         content: "#recuperaloGratis";
+//         position: fixed;
+//         top: 40%;
+//         left: 2%;
+//         transform: translate(-50%, -50%);
+//         font-family: s.$font-title-bold;
+//         font-size: 4rem;
+//         z-index: 2;
+//         color: color.mix(s.$primary, transparent, 10%);
+        
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: 20rem;
+//         height: 10rem;
+//         transform: rotate(-60deg);
+//         pointer-events: none;
+        
+//         @include s.media-tablet {
+//             font-size: 4rem;
+//             top: 35%;
+//             left: 30%;
+//             transform: rotate(-40deg);
+//          }
+        
+//         @include s.media-desktop {
+//             font-size: 4rem;
+//             top: 35%;
+//             left: 35%;
+//             transform: rotate(-40deg);
+//         }
+
+//         @include s.media-desktop {
+//             font-size: 5rem;
+//             top: 35%;
+//             left: 40%;
+//             transform: rotate(-30deg);
+//         }
+//     }
+// }

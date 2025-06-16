@@ -9,7 +9,17 @@ import * as ownerSignals from '@core/state/owner-data.signal';
 export class VehicleInformationService {
 
   // Caracteres no permitidos
-  private forbiddenChars = ['o', 'O', 'i', 'I', '-', '_', ' '];
+  private forbiddenChars: string[] = [
+    'o', 'O', 'i', 'I', '-', '_', ' ', 'q', 'Q', 'ñ', 'Ñ', '@', '?', '¿',
+    '!', '¡', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '.', '/', 
+    ':', ';', '<', '=', '>', '[', '\\', ']', '^', '`', '{', '|', '}', '~', '°', '¬'
+  ];
+
+  private forbiddenCharsFolder: string[] = [
+    '_', '@', '?', '¿',
+    '!', '¡', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '.', 
+    ':', ';', '<', '=', '>', '[', '\\', ']', '^', '`', '{', '|', '}', '~', '°', '¬'
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -20,14 +30,18 @@ export class VehicleInformationService {
     return this.forbiddenChars;
   }
 
+  getForbiddenCharsFolder(): string[] {
+    return this.forbiddenCharsFolder;
+  }
+
 
   // Cargar  formularios
   public loadForm(): FormGroup {
     return this.fb.group(
       {
+        folder: ['', [this.forbiddenCharactersFolderValidator()]],
         plate: ['', [Validators.minLength(5), Validators.maxLength(7), this.forbiddenCharactersValidator()]],
         serial: ['', [Validators.minLength(17), Validators.maxLength(17), this.forbiddenCharactersValidator()]],
-        folder: ['']
       },
       {
         validators: this.oneFieldRequired()
@@ -43,6 +57,21 @@ export class VehicleInformationService {
         for (let char of this.forbiddenChars) {
           if (value.includes(char)) {
             return { forbiddenCharacters: true };
+          }
+        }
+      }
+      return null; // válido
+    };
+  }
+
+  // Validacion de caracteres específicos
+  private forbiddenCharactersFolderValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (typeof value === 'string') {
+        for (let char of this.forbiddenCharsFolder) {
+          if (value.includes(char)) {
+            return { forbiddenCharsFolder: true };
           }
         }
       }

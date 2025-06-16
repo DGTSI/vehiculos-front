@@ -1,4 +1,12 @@
-<div class="container-site mb-5">
+<div class="container-site">
     <app-header />
-    <app-form-user />
+
+    @if(!showFormVehicle) {
+        <app-introduction/>
+    }
+    @if(showFormVehicle) {
+        <app-form-user />
+    }
+    <img class="w-100" src="/img/grecas-verdes-1.png" alt="">
+    <app-footer />
 </div>

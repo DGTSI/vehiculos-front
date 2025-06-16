@@ -47,7 +47,7 @@ class="message justify-content-center align-items-center gap-2 px-3"
 
     }
 
-    <p>{{ message }}</p>
+    <p  [innerText]="message">{{ message }}</p>
 
     <svg (click)="onClose()" 
     [ngClass]="{

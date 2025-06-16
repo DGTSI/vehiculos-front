@@ -1,8 +1,8 @@
 import { Component, effect } from '@angular/core';
-import { OwnerInformationComponent } from "../../components/owner-information/owner-information.component";
-import { VehicleInformationComponent } from "../../components/vehicle-information/vehicle-information.component";
 import { CommonModule } from '@angular/common';
-import { SmallMessageComponent } from "../../../shared/components/small-message/small-message.component";
+import { OwnerInformationComponent } from '@features/components/owner-information/owner-information.component';
+import { VehicleInformationComponent } from '@features/components/vehicle-information/vehicle-information.component';
+import { SmallMessageComponent } from '@shared/components/small-message/small-message.component';
 
 import * as ownerSignals from '@core/state/owner-data.signal';
 

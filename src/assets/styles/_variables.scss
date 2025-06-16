@@ -1,16 +1,28 @@
-$metropolis-normal: 'Metropolis-medium', sans-serif;
-$metropolis-semi: 'Metropolis-semibold', sans-serif;
-$metropolis-bold: 'Metropolis-bold', sans-serif;
+$font-text-normal: 'Lato-regular', sans-serif;
+$font-text-bold: 'Lato-bold', sans-serif;
+$font-title-bold: 'Mulish-bold', sans-serif;
 
-$primary: #003765;
+$primary: #003057;
 
-$secondary: #20A29A;
+// $secondary: #20A29A;
+$secondary: #ded5cf;
+$secondary-light: #f1f1de;
+
+// $third: #d5b887;
+$third: #f7ab31;
 
 $gray: #AFAFB4;
 $yellow: #FACA38;
+$yellow-announcement: #fdce00; 
 $blue-acua: #81bcfa;
 $red-warngin: #f66e6e;
+$green-light: #9ecfa2;
+$green-hover: #64aaaa;
 
 $svg-danger: #ff002f;
-$svg-info: #007aff;
+$svg-info: #003b43;
 $svg-warn: #ff9500;
+
+$banner-hover: #e2e2da;
+
+$boder-primary: #003a42;

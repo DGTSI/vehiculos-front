@@ -5,13 +5,13 @@
   }
   
   @mixin media-desktop {
-    @media (min-width: 1280px) and (max-width: 1920px) {
+    @media (min-width: 1280px) and (max-width: 1919px) {
         @content;
     }
   }
   
   @mixin media-large-desktop {
-    @media (min-width: 1921px) {
+    @media (min-width: 1920px) {
         @content;
     }
   }

@@ -1,38 +1,62 @@
 @use '@style/index.scss' as s;
 
-header {
+.header {
     width: 100%;
-    background: url(/img/banner.png);
-    padding: .5rem 2rem;
-
-    display: flex;
-    justify-content: center;
+    // background: s.$primary;
+    background-image: url(src/assets/img/banner-azul-1.png);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    padding: 1.5rem 0;
     
-    @include s.media-tablet {
-        justify-content: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-        img {
-            width: 25% !important;
+    .img {
+        text-align: center;
+    }
+
+    .resguardo {
+        h1 {
+            text-align: center;
+            color: s.$banner-hover;
+            
+            span {
+                color: s.$green-hover;
+            }
         }
     }
 
-    @include s.media-desktop {
-        justify-content: start;
+    .content {
+        margin-top: 2rem;
+        p {
+            color: white;
+            text-align: center;
+            font-family: s.$font-text-bold;
+        }
 
-        img {
-            width: 15% !important;
+        .hashtage {
+            // color: s.$third;
+            color: s.$yellow-announcement;
         }
     }
+    
+    @include s.media-resolution(721px) {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1.5rem 3rem;
 
-    @include s.media-large-desktop {
-        justify-content: start;
+        .content {
+            margin: 0;
+
+            p {
+                text-align: end;
+            }
+        }
 
         img {
-            width: 10% !important;
+            width: 100% !important;
         }
-    }
-
-    img {
-        width: 50%;
     }
 }
