@@ -1,29 +1,29 @@
-<form class="m-auto my-4" 
+<form class="m-auto" 
  [formGroup]="formVehicle" (ngSubmit)="onSubmit()">
     <fieldset>
         <legend class="text-center fw-semibold w-100">Datos del vehículo</legend>
 
         <div class="show-message text-center m-auto">
-            <app-small-message message="Ingrese un solo criterio de búsqueda*" type="info" />
+            <app-small-message [message]="'La carpeta de investigación es obligatoria. \n Coloca las placas o el número de serie como complemento*'" type="info" />
         </div>
 
         <div class="groups">
             
             <div class="group">
                 <label for="folder">Carpeta de investigación:</label>
-                <input type="text" id="folder" placeholder="Carpeta de investigación"
-                formControlName="folder">
+                <input type="text" id="folder" placeholder="Carpeta de investigación" [ngClass]="{ 'no-modify': isDataOwner }"
+                formControlName="folder" (paste)="onPasteFolder($event)" (input)="onInputFolder($event)">
             </div>
 
             <div class="group">
                 <label for="plate">Placa del vehículo (sin guiones ni espacios) (5-7 digitos):</label>
-                <input type="text" id="plate" placeholder="Placa del vehículo"
+                <input type="text" id="plate" placeholder="Placa del vehículo" [ngClass]="{ 'no-modify': isDataOwner }"
                 formControlName="plate" (paste)="onPaste($event)" (input)="onInput($event)">
             </div>
         
             <div class="group">
-                <label for="serial">Número de serie (NIV) (17 digitos):</label>
-                <input type="text" id="serial" placeholder="Número de serie del vehículo"
+                <label for="serial">Número de serie (17 digitos):</label>
+                <input type="text" id="serial" placeholder="Número de serie del vehículo" [ngClass]="{ 'no-modify': isDataOwner }"
                 formControlName="serial" (paste)="onPaste($event)" (input)="onInput($event)">
             </div>
 
@@ -31,11 +31,17 @@
     </fieldset>
 
     <!-- Botones -->
-    <div class="buttons d-flex justify-content-end w-100">
-        <button class="btn" [ngClass]="isDataOwner ? 'btn-block' : 'btn-outline-primary'"
-        type="submit" [disabled]="isDataOwner">
-            Verificar
-        </button>
+    <div class="buttons d-flex w-100">
+
+        @if (!showLoader) {
+            <button class="btn" [ngClass]="isDataOwner ? 'btn-block' : 'btn-outline-primary'"
+            type="submit" [disabled]="isDataOwner">
+                Verificar
+            </button>
+        } @else {
+            <app-btn-loader />
+        }
+
     </div>
 </form>
 

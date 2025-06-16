@@ -1,0 +1,95 @@
+@use '@style/index.scss' as s;
+
+.introduction {
+    background: url(src/assets/img/fondo-crema-con-franja-izq.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    // background-color: s.$secondary-light;
+    width: 100dvw;
+
+    .content {
+        padding-top: 2rem;
+        width: 90%;
+        margin: 0 auto;
+        
+        .content-intro {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            .text-content {
+                grid-column: 0 / 3;
+            }
+
+
+            @include s.media-resolution(720px) {
+                // display: flex;
+                // justify-content: center;
+                // align-items: center;
+            }
+
+            @include s.media-tablet {
+                gap: 2rem;
+            }
+            
+            @include s.media-desktop {
+                gap: 3rem;
+            }
+            
+            @include s.media-large-desktop {
+                gap: 3rem;
+            }
+
+            .text-content {
+                text-align: justify;
+            }
+
+
+            .video-intro {
+                margin-top: 2rem;
+                text-align: center;
+                
+                .frame {
+                    border-radius: .5rem;
+                    height: 20rem;
+                    width: 12rem;
+                    
+                    @include s.media-tablet {
+                        height: 25rem;
+                        width: 15rem;
+                    }
+                    
+                    @include s.media-desktop {
+                        height: 35rem;
+                        width: 20rem;
+                    }
+
+                    @include s.media-large-desktop {
+                        height: 45rem;
+                        width: 30rem;
+                    }
+                }
+            }
+        }
+    }
+
+    
+    .buttons {
+        padding-bottom: 2rem;
+        justify-content: flex-start;
+        margin-top: 2rem;
+        
+        .btn {
+            // z-index: 3;
+            padding: .5rem 2rem;
+        }
+        
+    }
+}
+
+.color {
+    background-color: s.$primary;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+}

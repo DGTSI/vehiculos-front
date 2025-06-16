@@ -1,0 +1,84 @@
+@use 'sass:color';
+@use '@style/index.scss' as s;
+
+.footer {
+    // background-color: color.mix(s.$secondary, transparent, 40%);
+    // background: url(src/assets/img/nuevo-banner.png);
+    background: url(src/assets/img/banner-azul-1.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding: 2rem 1rem;
+    
+    .footer-title {
+        font-family: s.$font-title-bold;
+        text-transform: uppercase;
+        // color: s.$primary;
+        color: s.$third;
+    }
+    
+    @include s.media-desktop {
+        padding: 1rem 1rem;
+
+    }
+
+    .contact {
+        flex-direction: column;
+        align-items: center;
+
+        .phone {
+            color: white;
+        }
+
+        .phone-title,
+        .email-title {
+            font-family: s.$font-title-bold;
+            margin-top: 1rem;
+            // color: s.$primary;
+            color: white;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        @include s.media-resolution(721px) {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        .email {
+            span a {
+                font-family: s.$font-text-bold;
+                color: s.$third !important;
+            }
+        }
+    }
+
+    p {
+        width: 90%;
+        margin: auto;
+
+        @include s.media-resolution(721px) {
+            width: 100%;
+            text-align: start;
+            padding: 0 2rem;
+        }
+
+        span{
+            font-weight: bold;
+            // color: color.mix(s.$third, black, 70%);
+            color: s.$third;
+            white-space: nowrap;
+        }
+    }
+
+    .hashtage {
+        // color: s.$primary !important;
+        color: s.$yellow-announcement;
+        font-family: s.$font-text-bold;
+        text-align: center;
+    }
+}

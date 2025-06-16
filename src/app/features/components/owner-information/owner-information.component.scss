@@ -1,10 +1,19 @@
 @use '@style/index.scss' as s;
 
 form {
+    background: url(src/assets/img/fondo-crema-con-franja-izq.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
    
     fieldset {
         legend {
-            background-color: s.$secondary;
+            // background-color: s.$green-hover;
+            // background-color: s.$primary;
+            background: url(src/assets/img/banner-azul-1.png);
+            background-repeat: no-repeat;
+            background-position: left;
+            background-size: cover;
             color: white;
             padding: .5rem 0;
             width: 100vw;
@@ -19,7 +28,7 @@ form {
     .buttons {
         width: 90dvw;
         margin: auto;
-
+        // z-index: 3;
     }     
 }
 
@@ -33,6 +42,9 @@ form fieldset .group {
         padding: .5rem;
         border-radius: .3rem;
         border: 1px solid s.$gray;
+        text-transform: uppercase;
+        cursor: no-drop;
+        user-select: all;
     }
 }
 
@@ -148,5 +160,13 @@ form fieldset .groups {
 
     .external {
         grid-area: external;
+    }
+}
+
+.images {
+    display: flex;
+
+    .grecas {
+        width: 100%;
     }
 }

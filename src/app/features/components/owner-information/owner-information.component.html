@@ -1,7 +1,7 @@
-<form id="owner" class="m-auto my-4" 
+<form id="owner" class="m-auto" 
 [formGroup]="form" (ngSubmit)="onSubmit()">
     <fieldset>
-        <legend class="text-center fw-semibold w-100">Datos del denunciante</legend>
+        <legend class="text-center fw-semibold w-100">Datos de contacto</legend>
         
         <div class="groups">
             <div class="group name">
@@ -15,7 +15,7 @@
             </div>
         
             <div class="group lastName2">
-                <label for="materno">Apellido materno *:</label>
+                <label for="materno">Apellido materno :</label>
                 <input type="text" id="materno" placeholder="Apellido materno" formControlName="materno">
             </div>
         
@@ -30,7 +30,7 @@
             </div>
         
             <div class="group phone2">
-                <label for="celular">Teléfono 2 *:</label>
+                <label for="celular">Teléfono 2 :</label>
                 <input type="text" id="celular" placeholder="Teléfono 2" formControlName="celular">
             </div>
         
@@ -70,17 +70,21 @@
             </div>
         
             <div class="group external">
-                <label for="noexterior">Número exterior *:</label>
+                <label for="noexterior">Número exterior :</label>
                 <input type="text" id="noexterior" placeholder="Número exterior" formControlName="noexterior">
             </div>
         </div>
     </fieldset>
 
-    <div class="buttons d-flex w-100">
-        <button class="btn" [ngClass]="isFormSubmit ? 'btn-block' : 'btn-outline-primary'" 
-        type="submit" [disabled]="isFormSubmit">
-            Contactar a Call Center
-        </button>
+    <div class="buttons d-flex w-100 pb-5">
+        @if(!showLoader) {
+            <button class="btn" [ngClass]="isFormSubmit ? 'btn-block' : 'btn-outline-primary'" 
+            type="submit" [disabled]="isFormSubmit">
+                Enviar datos
+            </button>
+        } @else {
+            <app-btn-loader />
+        }
     </div>
 </form>
 

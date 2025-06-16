@@ -3,19 +3,21 @@ import { AfterViewInit, Component, effect, OnDestroy, OnInit } from '@angular/co
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { OwnerInformationService } from '@core/services/owner-information.service';
 import { SweetAlert } from '@shared/utilities/sweetalert';
-
-import * as ownerSignals from '@core/state/owner-data.signal';
 import { IComplainant } from '@shared/types/icomplainant.type';
 import { OwnerApiService } from '@core/api/owner-api.service';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BtnLoaderComponent } from '@shared/components/btn-loader/btn-loader.component';
+
+import * as ownerSignals from '@core/state/owner-data.signal';
 
 
 @Component({
   selector: 'app-owner-information',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BtnLoaderComponent
   ],
   templateUrl: './owner-information.component.html',
   styleUrl: './owner-information.component.scss'
@@ -24,6 +26,8 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
   form!: FormGroup;
   isFormSubmit: boolean = false;
   complainant: IComplainant | undefined = undefined;
+  contact: IComplainant | undefined = undefined;
+  showLoader: boolean = false;
 
   private subs: Subscription = new Subscription();
   constructor(
@@ -50,9 +54,9 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
   private loadSignals(): void {
     this.complainant = ownerSignals.getDataComplainant();
 
-    if(this.complainant) {
-      this.ownerInformationService.addValuesForm(this.form, this.complainant)
-    }
+    // if(this.complainant) {
+    //   this.ownerInformationService.addValuesForm(this.form, this.complainant)
+    // }
 
     this.isFormSubmit = ownerSignals.getIsFormSubmit();
   }
@@ -63,7 +67,9 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
         next: (resp: boolean) => {
           if(resp) {
             setTimeout(() => {
-              SweetAlert.basic('Los datos ya estan registrados\nEn unos días una persona se pondra en contacto contigo', 'success')
+              SweetAlert.basic('Los datos ya estan registrados\nEn unos días una persona se pondra en contacto con usted', 'success')
+            }, 350);
+            setTimeout(() => {
               const element = document.querySelector('#owner');
               element?.scrollIntoView({ behavior: 'smooth' });
             }, 15);
@@ -80,9 +86,16 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   onSubmit(): void {
-    // TODO: DESHABILITAR EL BOTON UNA VEZ SE HAYAN ALMACENADO LOS DATOS (INCLUSO AL RECARGAR LA PAGIA EL BOTON DEBE DE ESTAR DESHABILITADO)
+    console.log(this.complainant);
+    console.log(this.contact);
+    
+
+
+    this.showLoader = true;
     this.subs.add(
-      this.ownerApi.saveComplainant(this.form.value as IComplainant).subscribe({
+      this.ownerApi.saveComplainant(this.form.value as IComplainant)
+      .pipe(finalize(() => this.showLoader = false))
+      .subscribe({
         next: (resp: boolean) => {
           if(resp) {
             ownerSignals.setIsFormSubmit(true);
@@ -95,6 +108,9 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
           
         },
         error: (e: HttpErrorResponse) => {
+          console.log(e);
+          
+          if(e.status === 400) SweetAlert.basic("Algunos datos no son válidos", 'error');
           if(e.status === 409) SweetAlert.basic("Sus datos ya han sido registrados", 'success');
         }
       })

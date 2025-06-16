@@ -2,7 +2,7 @@
 @use '@style/index.scss' as s;
 
 p {
-    font-family: s.$metropolis-semi;
+    font-family: s.$font-text-bold;
     font-size: .9rem;
     max-width: 75%;
     
@@ -24,8 +24,8 @@ p {
 
 .message-info {
     color: s.$svg-info;
-    background-color: color.mix(s.$blue-acua, transparent, 60%);
-    border: 2px solid color.mix(s.$blue-acua, black, 80%);
+    background-color: #e6f2f0;
+    border: 2px solid color.mix(s.$green-hover, black, 80%);
 }
 
 .message-danger {
@@ -43,6 +43,7 @@ p {
 }
 
 .svg-info {
+    // stroke: s.$svg-info;
     stroke: s.$svg-info;
 }
 
