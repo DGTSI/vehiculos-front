@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment.development';
 import { IComplainant } from '@shared/types/icomplainant.type';
+import { IFolder } from '@shared/types/ifolder.type';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class OwnerApiService {
     return this.http.get<boolean>(`${this.urlValidateComplainant}?ctrluinv=${ctrluinv}`);
   }
 
-  public saveComplainant(dto: IComplainant): Observable<boolean> {
-    return this.http.post<boolean>(this.urlSaveComplainant, dto);
+  public saveComplainant(dto: IComplainant, folder: IFolder): Observable<boolean> {
+    return this.http.post<boolean>(this.urlSaveComplainant, {dto, folder});
   }
 }

@@ -8,11 +8,7 @@ form {
    
     fieldset {
         legend {
-            // background-color: s.$green-hover;
-            // background-color: s.$primary;
-            background: url(src/assets/img/banner-azul-1.png);
-            background-repeat: no-repeat;
-            background-position: left;
+            background-color: s.$secondary;
             background-size: cover;
             color: white;
             padding: .5rem 0;
@@ -43,8 +39,18 @@ form fieldset .group {
         border-radius: .3rem;
         border: 1px solid s.$gray;
         text-transform: uppercase;
-        cursor: no-drop;
-        user-select: all;
+    }
+
+    
+}
+
+form fieldset .email {
+    input {
+        text-transform: none;
+
+        &::placeholder {
+            text-transform: uppercase;
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-<form id="owner" class="m-auto" 
+<form id="owner" class="m-auto pb-5" 
 [formGroup]="form" (ngSubmit)="onSubmit()">
     <fieldset>
         <legend class="text-center fw-semibold w-100">Datos de contacto</legend>
@@ -76,7 +76,7 @@
         </div>
     </fieldset>
 
-    <div class="buttons d-flex w-100 pb-5">
+    <div class="buttons d-flex w-100">
         @if(!showLoader) {
             <button class="btn" [ngClass]="isFormSubmit ? 'btn-block' : 'btn-outline-primary'" 
             type="submit" [disabled]="isFormSubmit">

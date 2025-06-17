@@ -43,9 +43,9 @@ export class VehicleInformationService {
         plate: ['', [Validators.minLength(5), Validators.maxLength(7), this.forbiddenCharactersValidator()]],
         serial: ['', [Validators.minLength(17), Validators.maxLength(17), this.forbiddenCharactersValidator()]],
       },
-      {
-        validators: this.oneFieldRequired()
-      }
+      // {
+      //   validators: this.folderAndOneOfPlateOrSerial()
+      // }
     );
   }
 
@@ -80,15 +80,23 @@ export class VehicleInformationService {
   }
 
   // Validador para un campo obligatorio
-  private oneFieldRequired(): ValidatorFn {
+  private folderAndOneOfPlateOrSerial(): ValidatorFn {
     return (group: AbstractControl): ValidationErrors | null => {
       const controls = (group as any).controls;
-      const hasAtLeastOneValue = Object.values(controls).some((control: any) => {
-        return control.value && control.value.toString().trim() !== '';
-      });
-
-      return hasAtLeastOneValue ? null : { atLeastOneRequired: true };
-    }
+  
+      const folder = controls['folder']?.value?.toString().trim();
+      const plate = controls['plate']?.value?.toString().trim();
+      const serial = controls['serial']?.value?.toString().trim();
+  
+      const folderIsValid = folder !== '';
+      const plateOrSerialIsValid = plate !== '' || serial !== '';
+  
+      if (folderIsValid && plateOrSerialIsValid) {
+        return null;
+      }
+  
+      return { folderAndOneRequired: true };
+    };
   }
 
   // Deshabilitar campos

@@ -3,60 +3,82 @@
 .header {
     width: 100%;
     // background: s.$primary;
-    background-image: url(src/assets/img/banner-azul-1.png);
+    background-image: url(/img/encabezado.jpg);
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0 4rem 0;
     
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    .img {
-        text-align: center;
-    }
-
-    .resguardo {
-        h1 {
-            text-align: center;
-            color: s.$banner-hover;
-            
-            span {
-                color: s.$green-hover;
-            }
-        }
-    }
-
-    .content {
-        margin-top: 2rem;
-        p {
-            color: white;
-            text-align: center;
-            font-family: s.$font-text-bold;
-        }
-
-        .hashtage {
-            // color: s.$third;
-            color: s.$yellow-announcement;
-        }
-    }
-    
-    @include s.media-resolution(721px) {
+       @include s.media-resolution(721px) {
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
-        padding: 1.5rem 3rem;
+        padding: .7rem 3rem 2rem 3rem;
 
         .content {
             margin: 0;
 
             p {
-                text-align: end;
+                text-align: end !important;
             }
         }
 
         img {
             width: 100% !important;
+        }
+    }
+
+    .img {
+        text-align: center;
+        width: 50%;
+        
+        @include s.media-resolution(721px) {
+            width: 20%;
+        }
+
+        @include s.media-large-desktop {
+            width: 12%;
+        }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .resguardo {
+        h1 {
+            text-align: center;
+            color: s.$primary;
+
+            @include s.media-tablet {
+                font-size: 1.3rem;
+            }
+
+            @include s.media-desktop {
+                font-size: 1.5rem;
+            }
+            
+            span {
+                color: s.$secondary;
+            }
+        }
+    }
+
+    .content {
+        p {
+            color: s.$primary;
+            text-align: center;
+            font-family: s.$font-text-bold;
+            font-size: 1.2rem;
+        }
+
+        .hashtage {
+            // color: s.$third;
+            color: s.$third;
         }
     }
 }

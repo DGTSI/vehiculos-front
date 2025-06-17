@@ -8,6 +8,7 @@ import { OwnerApiService } from '@core/api/owner-api.service';
 import { finalize, Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BtnLoaderComponent } from '@shared/components/btn-loader/btn-loader.component';
+import { IFolder } from '@shared/types/ifolder.type';
 
 import * as ownerSignals from '@core/state/owner-data.signal';
 
@@ -53,11 +54,6 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
 
   private loadSignals(): void {
     this.complainant = ownerSignals.getDataComplainant();
-
-    // if(this.complainant) {
-    //   this.ownerInformationService.addValuesForm(this.form, this.complainant)
-    // }
-
     this.isFormSubmit = ownerSignals.getIsFormSubmit();
   }
 
@@ -86,14 +82,21 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   onSubmit(): void {
-    console.log(this.complainant);
-    console.log(this.contact);
-    
-
+    const folder: IFolder = this.crateObjectFolder();
+    const contact: IComplainant = this.form.value as IComplainant;
 
     this.showLoader = true;
+    if(this.form.valid) {
+      this.sendData(folder, contact);
+    } else {
+      this.showLoader = false;
+      SweetAlert.basic('Faltan campos por llenar', 'warning');
+    }
+  }
+
+  private sendData(folder: IFolder, contact: IComplainant): void {
     this.subs.add(
-      this.ownerApi.saveComplainant(this.form.value as IComplainant)
+      this.ownerApi.saveComplainant(contact, folder)
       .pipe(finalize(() => this.showLoader = false))
       .subscribe({
         next: (resp: boolean) => {
@@ -108,12 +111,19 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
           
         },
         error: (e: HttpErrorResponse) => {
-          console.log(e);
-          
           if(e.status === 400) SweetAlert.basic("Algunos datos no son válidos", 'error');
-          if(e.status === 409) SweetAlert.basic("Sus datos ya han sido registrados", 'success');
+          if(e.status === 409) SweetAlert.basic("Sus datos ya han sido registrados\nEn unos días se pondran en contacto con usted", 'success');
+          if(e.status === 500) SweetAlert.basic(`ERROR\n Estatus: ${e.status}, Respuesta: ${e.ok}`, 'error');
         }
       })
     );
+  }
+
+  private crateObjectFolder(): IFolder {
+    return {
+      folder: ownerSignals.getFolder(),
+      plate: ownerSignals.getPlate(),
+      serial: ownerSignals.getSerial()
+    }
   }
 }

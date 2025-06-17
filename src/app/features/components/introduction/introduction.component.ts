@@ -1,8 +1,9 @@
-import { AfterViewInit, ChangeDetectorRef, Component, effect, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import * as ownerSignal from '@core/state/owner-data.signal';
 import * as instroductionSignal from '@core/state/introduction.signal';
+import { SesonStorage } from '@shared/utilities/session-storage';
 
 @Component({
   selector: 'app-introduction',
@@ -12,33 +13,14 @@ import * as instroductionSignal from '@core/state/introduction.signal';
   templateUrl: './introduction.component.html',
   styleUrl: './introduction.component.scss'
 })
-export class IntroductionComponent implements AfterViewInit {
-
-  showAnimations: boolean = false;
-  showForm: boolean = false;
-
-  constructor(
-
-  ) {
-    effect(() => this.loadSignals());
-  }
-
-  ngAfterViewInit(): void {
-  }
-
-  private loadSignals(): void {
-    this.showAnimations = instroductionSignal.getActivateTransitions()
-
-    console.log(this.showAnimations);
-    
-  }
+export class IntroductionComponent {
 
   onClick(): void {
-    instroductionSignal.setActivateTransitions(true);
+    SesonStorage.setItem(SesonStorage.INTRODUCTION, true);
+    instroductionSignal.setActivateTransitionsIntro(true);
 
-    setTimeout(() => {
-      ownerSignal.setShowFormVehicle(true);
-    }, 1000);
-  }
+    setTimeout(() => instroductionSignal.setActivateTransitionsForms(true), 360);
+    setTimeout(() => ownerSignal.setShowFormVehicle(true), 350);
+  } 
 
 }

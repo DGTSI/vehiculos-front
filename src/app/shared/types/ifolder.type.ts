@@ -1,4 +1,5 @@
 export interface IFolder {
-    ctrluniv: string;
-    carpetainv: string;
+    folder: string;
+    plate?: string;
+    serial?: string;
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment.development';
-import { IComplainant } from '@shared/types/icomplainant.type';
+import { IFolder } from '@shared/types/ifolder.type';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,17 +19,22 @@ export class VehicleApiService {
   ) { }
 
   // Validar el folder
-  public validateFolder(folder: string): Observable<IComplainant> {
-    return this.http.get<IComplainant>(`${this.urlVerifyFolder}?folder=${folder}`);
+  public validateFolder(folder: IFolder): Observable<boolean> {
+    return this.http.post<boolean>(`${this.urlVerifyFolder}`, folder);
   }
 
+  // Validar el folder
+  // public validateFolder(folder: string): Observable<boolean> {
+  //   return this.http.get<boolean>(`${this.urlVerifyFolder}?folder=${folder}`);
+  // }
+
   // Validar las placas
-  public validatePlate(plate: string): Observable<IComplainant> {
-    return this.http.get<IComplainant>(`${this.urlVerifyPlate}?placas=${plate}`);
+  public validatePlate(plate: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.urlVerifyPlate}?placas=${plate}`);
   }
 
   // Validar el NIV
-  public validateSerial(serial: string): Observable<IComplainant> {
-    return this.http.get<IComplainant>(`${this.urlVerifySerial}?noserie=${serial}`);
+  public validateSerial(serial: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.urlVerifySerial}?noserie=${serial}`);
   }
 }

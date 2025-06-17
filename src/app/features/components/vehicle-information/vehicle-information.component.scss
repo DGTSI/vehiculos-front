@@ -8,12 +8,7 @@ form {
 
     fieldset {
         legend {
-            // background-color: s.$green-hover;
-            background-color: s.$primary;
-            background: url(src/assets/img/banner-azul-1.png);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+            background-color: s.$secondary;
             color: s.$primary;
             color: white;
             padding: .5rem 0;
@@ -47,6 +42,28 @@ form {
 
     }     
 }
+
+form fieldset .groups .radios {
+    gap: 1rem;
+    .radio-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        label {
+            font-size: .7rem;
+            
+            @include s.media-resolution(721px) {
+                font-size: .9rem;
+            }
+        }
+
+        label, input {
+            cursor: pointer;
+        }
+    }
+    }
 
 form fieldset .group {
     margin: 1rem 0;

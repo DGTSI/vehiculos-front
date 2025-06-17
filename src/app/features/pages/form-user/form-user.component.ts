@@ -2,7 +2,6 @@ import { Component, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OwnerInformationComponent } from '@features/components/owner-information/owner-information.component';
 import { VehicleInformationComponent } from '@features/components/vehicle-information/vehicle-information.component';
-import { SmallMessageComponent } from '@shared/components/small-message/small-message.component';
 
 import * as ownerSignals from '@core/state/owner-data.signal';
 
@@ -12,7 +11,6 @@ import * as ownerSignals from '@core/state/owner-data.signal';
     CommonModule,
     OwnerInformationComponent,
     VehicleInformationComponent,
-    SmallMessageComponent
 ],
   templateUrl: './form-user.component.html',
   styleUrl: './form-user.component.scss'

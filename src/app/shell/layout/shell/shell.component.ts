@@ -1,4 +1,4 @@
-import { Component, effect, OnInit } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { FormUserComponent } from "@features/pages/form-user/form-user.component";
 import { HeaderComponent } from "@features/components/header/header.component";
 import { FooterComponent } from "@features/components/footer/footer.component";
@@ -6,6 +6,8 @@ import { IntroductionComponent } from "@features/components/introduction/introdu
 import { CommonModule } from '@angular/common';
 
 import * as ownerSignal from '@core/state/owner-data.signal';
+import * as instroductionSignal from '@core/state/introduction.signal';
+import { SesonStorage } from '@shared/utilities/session-storage';
 
 @Component({
   selector: 'app-shell',
@@ -20,7 +22,9 @@ import * as ownerSignal from '@core/state/owner-data.signal';
   styleUrl: './shell.component.scss'
 })
 export class ShellComponent {
-  showFormVehicle: boolean = false;
+  showAnimationIntro: boolean = false;
+  showAnimationForms: boolean = false;
+  showFormVehicle: boolean = Boolean(SesonStorage.getItem(SesonStorage.INTRODUCTION)) || false;
 
   constructor(
 
@@ -29,7 +33,13 @@ export class ShellComponent {
   }
 
   private loadSignals(): void {
-    this.showFormVehicle = ownerSignal.getShowFormVehicle();
+    if(!this.showFormVehicle) {
+      this.showAnimationIntro = instroductionSignal.getActivateTransitionsIntro();
+      this.showAnimationForms = instroductionSignal.getActivateTransitionsForms();
+      this.showFormVehicle = ownerSignal.getShowFormVehicle();
+    } else {
+      this.showAnimationIntro = true
+      this.showAnimationForms = true
+    }
   }
-
 }

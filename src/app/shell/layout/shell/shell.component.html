@@ -1,12 +1,22 @@
 <div class="container-site">
     <app-header />
 
-    @if(!showFormVehicle) {
-        <app-introduction/>
-    }
-    @if(showFormVehicle) {
-        <app-form-user />
-    }
-    <img class="w-100" src="/img/grecas-verdes-1.png" alt="">
+    <div #containerRef class="content-transition">
+        @if(!showFormVehicle) {
+            <div class="app" [ngClass]="showAnimationIntro ? 'hidde-intro' : 'show-intro'">
+                <app-introduction/>
+            </div>
+        }
+        @if(showFormVehicle) {
+            <div class="app" [ngClass]="showAnimationForms ? 'show-forms' : 'hidde-forms'">
+                <app-form-user />
+            </div>
+        }
+        
+        <div class="img w-100">
+            <img class="w-100" src="/img/inferior.png" alt="">
+        </div>
+    </div>
+
     <app-footer />
 </div>

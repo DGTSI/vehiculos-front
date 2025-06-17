@@ -1,16 +1,15 @@
-<form class="m-auto" 
+<form class="m-auto pb-5  pt-4" 
  [formGroup]="formVehicle" (ngSubmit)="onSubmit()">
     <fieldset>
         <legend class="text-center fw-semibold w-100">Datos del vehículo</legend>
 
-        <div class="show-message text-center m-auto">
+        <div class="show-message text-center m-auto w-100">
             <app-small-message [message]="'La carpeta de investigación es obligatoria. \n Coloca las placas o el número de serie como complemento*'" type="info" />
         </div>
 
         <div class="groups">
-            
             <div class="group">
-                <label for="folder">Carpeta de investigación:</label>
+                <label for="folder">Carpeta de investigación*:</label>
                 <input type="text" id="folder" placeholder="Carpeta de investigación" [ngClass]="{ 'no-modify': isDataOwner }"
                 formControlName="folder" (paste)="onPasteFolder($event)" (input)="onInputFolder($event)">
             </div>
@@ -20,18 +19,17 @@
                 <input type="text" id="plate" placeholder="Placa del vehículo" [ngClass]="{ 'no-modify': isDataOwner }"
                 formControlName="plate" (paste)="onPaste($event)" (input)="onInput($event)">
             </div>
-        
+
             <div class="group">
                 <label for="serial">Número de serie (17 digitos):</label>
                 <input type="text" id="serial" placeholder="Número de serie del vehículo" [ngClass]="{ 'no-modify': isDataOwner }"
                 formControlName="serial" (paste)="onPaste($event)" (input)="onInput($event)">
             </div>
-
         </div>
     </fieldset>
 
     <!-- Botones -->
-    <div class="buttons d-flex w-100">
+    <div class="buttons d-flex w-100 mt-4">
 
         @if (!showLoader) {
             <button class="btn" [ngClass]="isDataOwner ? 'btn-block' : 'btn-outline-primary'"

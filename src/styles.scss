@@ -18,7 +18,8 @@ html {
 }
 
 body {
-    // background-color: s.$secondary-light;
+    // min-height: 0;
+    transition: all  1s ease;
 
 }
 
@@ -48,8 +49,8 @@ label {
     color: s.$boder-primary !important;
     
     &:hover {
-        // background-color: s.$primary !important;
-        background-color: s.$green-light !important;
+        background-color: s.$primary !important;
+        // background-color: s.$green-light !important;
         color: white !important;
         // color: s.$primary !important;
     }
