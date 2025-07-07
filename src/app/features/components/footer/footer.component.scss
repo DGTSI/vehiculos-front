@@ -3,58 +3,71 @@
 
 .footer {
     background-color: s.$primary;
-    padding: 1rem;
+    
+    .footer-content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-    .contact {
-       display: flex;
-       flex-direction: column;
-
-       @include s.media-resolution(721px) {
+        @include s.media-resolution(721px) {
+            width: 80%;
+            margin: auto;
+            padding: 2rem 0;
             flex-direction: row;
-            justify-content: center;
-            gap: 2rem;
-       }
-       
-        .div-title {
-            text-align: center;
-            flex: 1 1 50%;
-
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .footer-data {
+            padding: 1.5rem 0;
+            
             @include s.media-resolution(721px) {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                text-align: none;
-                font-size: 1.5rem;
+                padding: 0;
+            }
+
+            .img {
+                width: 40%;
+                margin-bottom: 1rem;
+
+                @include s.media-tablet {
+                    width: 20%;
+                }
+
+                @include s.media-desktop {
+                    width: 25%;
+                }
+
+                @include s.media-large-desktop {
+                    width: 30%;
+                }
+
+                img {
+                    width: 100%;
+                }
+            }
+        
+            .text {
+                color: white;
+                font-size: .8rem;
             }
         }
         
-        .data-contact {
-            color: white;
-            text-align: center;
-            margin-top: 1rem;
-            flex: 1 1 50%;
-
-            @include s.media-resolution(721px) {
-                p, a {
-                    display: flex;
-                    justify-content: flex-start;
-                    align-items: center;
-                    text-align: none;
-                }
+        .icons {
+            padding-bottom: 1rem;
+            ul li a img {
+                width: 2rem;
+                height: 2rem;
             }
-
-            a {
-                color: white;
+        
+            ul li {
+                transform: translateY(0);
+                transition: transform .2s ease;
+        
+                &:hover {
+                    transform: translateY(-.3rem);
+                }
             }
         }
     }
-    .hashtage {
-        color: s.$third;
-        font-family: s.$font-text-bold;
-        text-align: center;
-    }
-}
-.footer-title, .email-title, .phone-title {
-    color: s.$third;
-    font-family: s.$font-title-bold;
+
 }

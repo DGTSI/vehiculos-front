@@ -1,16 +1,19 @@
 @use '@style/index.scss' as s;
 
 form {
-    background: url(src/assets/img/fondo-crema-con-franja-izq.png);
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: cover;
+    background-color: white;
 
     fieldset {
+        @include s.media-resolution(721px) {
+            width: 90%;
+            margin: auto;
+        }
+
         legend {
-            background-color: s.$secondary;
+            border-top: 4px solid s.$bg;
+            border-bottom: 4px solid s.$bg;
+            width: 100%;
             color: s.$primary;
-            color: white;
             padding: .5rem 0;
         }
 
@@ -19,18 +22,23 @@ form {
             margin: auto;
 
             @include s.media-tablet {
-                width: 60%;
-                margin: 0 2rem;
+                width: 100%;
             }
-
+            
             @include s.media-desktop {
-                width: 50%;
-                margin: 0 2rem;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                align-items: end;
+                gap: 1rem;
+                width: 100%;
             }
 
             @include s.media-large-desktop {
-                width: 30%;
-                margin: 0 2rem;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                align-items: end;
+                gap: 1rem;
+                width: 100%;
             }
         }
     }
@@ -43,27 +51,6 @@ form {
     }     
 }
 
-form fieldset .groups .radios {
-    gap: 1rem;
-    .radio-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: .5rem;
-
-        label {
-            font-size: .7rem;
-            
-            @include s.media-resolution(721px) {
-                font-size: .9rem;
-            }
-        }
-
-        label, input {
-            cursor: pointer;
-        }
-    }
-    }
 
 form fieldset .group {
     margin: 1rem 0;
@@ -81,14 +68,59 @@ form fieldset .group {
 
 form {
     .buttons {
-        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto auto;
+        width: 80%;
+        margin: auto;
         
         @include s.media-resolution(721px) {
-            justify-content: end;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto;
             padding: 0 2rem;
         }
+        
         button {
             padding: .5rem 2rem;
+            width: 40%;
+            margin: auto;
+            
+            @include s.media-resolution(721px) {
+                width: min-content;
+                grid-column: 2 / 3;
+            }
+        }
+        
+        .text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            @include s.media-resolution(721px) {
+                grid-column: 3 / 4;
+                width: 100%;
+            }
+            
+            span {
+                margin-top: 1rem;
+                text-align: center;
+                transform: scale(1);
+                color: rgb(104, 0, 0);
+                font-family: s.$font-text-bold;
+                cursor: pointer;
+                transition: transform .2s ease;
+                
+                @include s.media-resolution(721px) {
+                    font-size: .9rem;
+                    width: 100%;
+                    margin: 0;
+                    text-align: left;
+                }
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
         }
     }
 }

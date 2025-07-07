@@ -18,7 +18,7 @@ export class OwnerApiService {
     private http: HttpClient,
   ) { }
 
-  public validateComplainant(ctrluinv: string): Observable<boolean> {
+  public validateContact(ctrluinv: string): Observable<boolean> {
     return this.http.get<boolean>(`${this.urlValidateComplainant}?ctrluinv=${ctrluinv}`);
   }
 

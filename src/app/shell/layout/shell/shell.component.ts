@@ -36,7 +36,7 @@ export class ShellComponent {
     if(!this.showFormVehicle) {
       this.showAnimationIntro = instroductionSignal.getActivateTransitionsIntro();
       this.showAnimationForms = instroductionSignal.getActivateTransitionsForms();
-      this.showFormVehicle = ownerSignal.getShowFormVehicle();
+      this.showFormVehicle = ownerSignal.getDisableFormVehicle();
     } else {
       this.showAnimationIntro = true
       this.showAnimationForms = true

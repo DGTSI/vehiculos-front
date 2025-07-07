@@ -1,29 +1,35 @@
 import { signal, WritableSignal } from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { IComplainant } from "@shared/types/icomplainant.type";
 
-const showFormVehicle: WritableSignal<boolean> = signal<boolean>(false);
-const showFormUser: WritableSignal<boolean> = signal<boolean>(false);
+const disableFormVehicle: WritableSignal<boolean> = signal<boolean>(false);
+const disableFormUser: WritableSignal<boolean> = signal<boolean>(true);
 const isFormSubmit: WritableSignal<boolean> = signal<boolean>(false);
 const dataComplainant: WritableSignal<IComplainant | undefined> = signal<IComplainant | undefined>(undefined);
+
 const folder: WritableSignal<string> = signal<string>("");
 const plate: WritableSignal<string> = signal<string>("");
 const serial: WritableSignal<string> = signal<string>("");
 
+const formVehicle: WritableSignal<FormGroup> = signal<FormGroup>(new FormGroup({}));
+const formContact: WritableSignal<FormGroup> = signal<FormGroup>(new FormGroup({}));
 
-export function setShowFormVehicle(show: boolean): void {
-    showFormVehicle.set(show);
+
+
+export function setDisableFormVehicle(show: boolean): void {
+    disableFormVehicle.set(show);
 }
 
-export function getShowFormVehicle(): boolean {
-    return showFormVehicle();
+export function getDisableFormVehicle(): boolean {
+    return disableFormVehicle();
 }
 
-export function setShowFormUser(show: boolean): void {
-    showFormUser.set(show);
+export function setDisableFormUser(show: boolean): void {
+    disableFormUser.set(show);
 }
 
-export function getShowFormUser(): boolean {
-    return showFormUser();
+export function getDisableFormUser(): boolean {
+    return disableFormUser();
 }
 
 export function setIsFormSubmit(isSubmit: boolean): void {
@@ -64,4 +70,20 @@ export function setSerial(data: string): void {
 
 export function getSerial(): string {
     return serial();
+}
+
+export function setFormVehicle(data: FormGroup): void {
+    formVehicle.set(data);
+}
+
+export function getFormVehiclel(): FormGroup {
+    return formVehicle();
+}
+
+export function setFormContact(data: FormGroup): void {
+    formContact.set(data);
+}
+
+export function getFormContact(): FormGroup {
+    return formContact();
 }

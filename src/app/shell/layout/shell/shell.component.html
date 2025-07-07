@@ -1,21 +1,18 @@
 <div class="container-site">
-    <app-header />
-
-    <div #containerRef class="content-transition">
-        @if(!showFormVehicle) {
-            <div class="app" [ngClass]="showAnimationIntro ? 'hidde-intro' : 'show-intro'">
-                <app-introduction/>
-            </div>
-        }
-        @if(showFormVehicle) {
-            <div class="app" [ngClass]="showAnimationForms ? 'show-forms' : 'hidde-forms'">
-                <app-form-user />
-            </div>
-        }
+    <div class="content-site">
+        <app-header />
         
-        <div class="img w-100">
-            <img class="w-100" src="/img/inferior.png" alt="">
+        <div>
+            <app-introduction/>
         </div>
+    
+        <div>
+            <app-form-user />
+        </div>
+    </div>
+    
+    <div class="img">
+        <img src="/img/inferior.png" alt="">
     </div>
 
     <app-footer />

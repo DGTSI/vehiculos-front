@@ -28,7 +28,7 @@ export class FormUserComponent {
   }
 
   private loadSignals(): void {
-    this.showFormUser = ownerSignals.getShowFormUser();
+    this.showFormUser = ownerSignals.getDisableFormUser();
     this.isFormSubmit = ownerSignals.getIsFormSubmit();
     
     this.showFormUserFn()

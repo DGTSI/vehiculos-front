@@ -1,19 +1,9 @@
 <main>
-    <!-- Datos del vehiculo -->
-     <div class="form-vehicle">
-         <app-vehicle-information />
-     </div>
-    
-    <!-- Datos del propietario -->
-    @if(showFormUser) {
-        <div class="form-user" [ngClass]="showFormUserAnimation ? 'show' : 'hidde'">
-            <app-owner-information />
-        </div>
-    }
+    <div class="form-vehicle">
+        <app-vehicle-information />
+    </div>
 
-    <!-- @if(isFormSubmit) {
-        <div id="message-send-data" class="message-send-data m-auto my-5 text-center">
-            <app-small-message message="Sus datos se han enviado, en unos días una persona se pondra en contacto con usted" type="info"/>
-        </div>
-    } -->
+    <div class="form-user">
+        <app-owner-information />
+    </div>
 </main>

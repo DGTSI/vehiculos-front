@@ -7,10 +7,10 @@ import { IComplainant } from '@shared/types/icomplainant.type';
 import { OwnerApiService } from '@core/api/owner-api.service';
 import { finalize, Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BtnLoaderComponent } from '@shared/components/btn-loader/btn-loader.component';
 import { IFolder } from '@shared/types/ifolder.type';
 
 import * as ownerSignals from '@core/state/owner-data.signal';
+import { BtnLoaderComponent } from '@shared/components/btn-loader/btn-loader.component';
 
 
 @Component({
@@ -18,17 +18,16 @@ import * as ownerSignals from '@core/state/owner-data.signal';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    BtnLoaderComponent
+    BtnLoaderComponent,
   ],
   templateUrl: './owner-information.component.html',
   styleUrl: './owner-information.component.scss'
 })
 export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestroy {
   form!: FormGroup;
-  isFormSubmit: boolean = false;
-  complainant: IComplainant | undefined = undefined;
   contact: IComplainant | undefined = undefined;
   showLoader: boolean = false;
+  disableForm: boolean = true;
 
   private subs: Subscription = new Subscription();
   constructor(
@@ -40,11 +39,12 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
 
   ngOnInit(): void {
     this.form = this.ownerInformationService.loadForm();
+    this.form.disable();
   }
 
   ngAfterViewInit(): void {
-    if(this.complainant) {
-      this.validateComplainant(this.complainant.ctrluinv);
+    if(this.contact) {
+      this.validateContact(this.contact.ctrluinv);
     }
   }
 
@@ -53,13 +53,15 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   private loadSignals(): void {
-    this.complainant = ownerSignals.getDataComplainant();
-    this.isFormSubmit = ownerSignals.getIsFormSubmit();
+    this.contact = ownerSignals.getDataComplainant();
+    this.disableForm = ownerSignals.getDisableFormUser();
+    
+    this.disableForm ? this.form.disable() : this.form.enable();
   }
 
-  private validateComplainant(ctrluinv: string): void {
+  private validateContact(ctrluinv: string): void {
     this.subs.add(
-      this.ownerApi.validateComplainant(ctrluinv).subscribe({
+      this.ownerApi.validateContact(ctrluinv).subscribe({
         next: (resp: boolean) => {
           if(resp) {
             setTimeout(() => {
@@ -81,19 +83,31 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
     );
   }
 
-  onSubmit(): void {
-    const folder: IFolder = this.crateObjectFolder();
-    const contact: IComplainant = this.form.value as IComplainant;
+  // Enviar datos al boton
+  onChange(): void {
+    const formValid: boolean = this.form.valid;
 
-    this.showLoader = true;
-    if(this.form.valid) {
-      this.sendData(folder, contact);
-    } else {
-      this.showLoader = false;
-      SweetAlert.basic('Faltan campos por llenar', 'warning');
+    if(formValid) {
+      ownerSignals.setFormContact(this.form);
     }
   }
 
+  // Click al boton
+  onSubmit(): void {
+    this.showLoader = true;
+
+    if(this.form.valid) {
+      const folder: IFolder = ownerSignals.getFormVehiclel().value as IFolder;
+      const contact: IComplainant = this.form.value as IComplainant;
+
+      this.sendData(folder, contact);
+    } else {
+      this.showLoader = false;
+      SweetAlert.basic('Algunos datos no son válidos\nVerifique nuevamente', 'warning');
+    }
+  }
+
+  // Enviar datos al backend
   private sendData(folder: IFolder, contact: IComplainant): void {
     this.subs.add(
       this.ownerApi.saveComplainant(contact, folder)
@@ -101,7 +115,7 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
       .subscribe({
         next: (resp: boolean) => {
           if(resp) {
-            ownerSignals.setIsFormSubmit(true);
+            this.form.disable();
             setTimeout(() => {
               SweetAlert.basic('En unos días una persona se pondra en contacto contigo', 'success');
               const element = document.querySelector('#message-send-data');
@@ -111,19 +125,12 @@ export class OwnerInformationComponent implements OnInit, AfterViewInit, OnDestr
           
         },
         error: (e: HttpErrorResponse) => {
-          if(e.status === 400) SweetAlert.basic("Algunos datos no son válidos", 'error');
+          if(e.status === 400) SweetAlert.basic("Algunos datos no son válidos\nVerifique nuevamente", 'warning');
           if(e.status === 409) SweetAlert.basic("Sus datos ya han sido registrados\nEn unos días se pondran en contacto con usted", 'success');
+          if(e.status === 422) SweetAlert.basic("Algunos datos no son válidos\nVerifique nuevamente", 'warning');
           if(e.status === 500) SweetAlert.basic(`ERROR\n Estatus: ${e.status}, Respuesta: ${e.ok}`, 'error');
         }
       })
     );
-  }
-
-  private crateObjectFolder(): IFolder {
-    return {
-      folder: ownerSignals.getFolder(),
-      plate: ownerSignals.getPlate(),
-      serial: ownerSignals.getSerial()
-    }
   }
 }

@@ -1,48 +1,19 @@
+@use '@style/index.scss' as s;
+
 .container-site {
-    // max-width: 80rem;
-    width: 100dvw;
-    height: auto;
-    margin: auto;
-    max-height: 500dvh;
-    transition: max-height .7s ease;
+  background-color: s.$bg;
+  overflow: hidden;
 
-    .content-transition {
-        position: relative;
-
-        .img {
-            position:absolute;
-            bottom: 0;
-            left: 0;
-
-            img {
-                object-position: center;
-                object-fit: cover;
-            }
-        }
-    }
+  @include s.media-resolution(721px) {
+    padding-top: 2rem;
+  }
+  
+  .content-site {
     
-    .app {
-      max-height: 0;
-      transition: 
-      max-height 0.7s ease-in-out,
-      transform  0.3s ease-in-out;
-    }
+    @include s.media-resolution(721px) {
+      width: 80%;
+      margin: auto;
     
-    .show-intro {
-      max-height: 500dvh;          /* o un valor en px que garantice cubrir el contenido */
-      transform: translateX(0);
     }
-    .hidde-intro {
-      max-height: 0;
-      transform: translateX(-100%);
-    }
-    
-    .show-forms {
-      max-height: 500dvh;
-      transform: translateX(0);
-    }
-    .hidde-forms {
-      max-height: 0;
-      transform: translateX(100%);
-    }
+  }
 }

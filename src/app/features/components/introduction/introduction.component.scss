@@ -1,71 +1,90 @@
 @use '@style/index.scss' as s;
 
 .introduction {
-    background: url(src/assets/img/fondo-crema-con-franja-izq.png);
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: cover;
-    // background-color: s.$secondary-light;
-    width: 100dvw;
-    padding: 2rem 0;
+    background-color: white;
+    padding: 1rem 0;
+    
+    // .title-intro {
+    //     margin: 0;
+    //     color: s.$primary;
+    //     text-align: center;
+    //     font-family: s.$font-title-bold;
+    //     font-weight: 900 !important;
 
-    .content {
-        width: 90%;
-        margin: auto;
-        
-        @include s.media-desktop {
-            width: 70%;
-        }
+    //     @include s.media-tablet {
+    //         font-size: 1.5rem;
+    //     }
 
-        @include s.media-large-desktop {
-            width: 70%;
-        }
-    }
+    //     @include s.media-desktop {
+    //         font-size: 1.5rem;
+    //     }
+
+    //     @include s.media-large-desktop {
+    //         font-size: 1.7rem;
+    //     }
+    // }
 
     .img {
+        margin: 2rem auto;
         width: 100%;
-        margin: auto;
         
-        @include s.media-tablet {
-            width: 50%;
-            margin-bottom: 1rem;
-        }
-        
-        @include s.media-desktop {
-            width: 40%;
-            margin-bottom: 1rem;
-        }
-        
-        @include s.media-large-desktop {
-            width: 50%;
-            margin-bottom: 1rem;
-        }
+        // @include s.media-tablet {
+        //     width: 85%;
+        // }
 
-        img {
-            width: 100%;
+        // @include s.media-desktop {
+        //     width: 70%;
+        // }
+
+        // @include s.media-large-desktop {
+        //     width: 60%;
+        // }
+
+        .image {
+            display: block;
+            width: 90%;
+            height: 59vh;
+            background-image: url(/img/banner-celular.png);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: auto;
+            
+            @include s.media-tablet {
+                width: 83%;
+                height: 51vh;
+                background-image: url(/img/banner-tablet.png);
+            }
+            
+            @include s.media-resolution(1279px) {
+                width: 83%;
+                height: 51vh;
+                background-image: url(/img/banner-pc.png);
+            }
         }
     }
 
-    .text {
-        background-color: #fff;
-        border-radius: .5rem;
-        padding: 1rem;
-        margin-bottom: 2rem;
+    p {
+        width: 95%;
+        margin: auto;
+        text-align: center;
+
+        @include s.media-tablet {
+            width: 80%;
+        }
         
         @include s.media-desktop {
-            border-radius: 1rem;
-            padding: 1.5rem;
+            width: 60%;
         }
         
         @include s.media-large-desktop {
-            border-radius: 1rem;
-            padding: 2rem;
+            font-size: 1.3rem;
+            width: 55%;
         }
 
-        .buttons {
-            justify-content: center;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
+        b {
+            color: s.$primary;
+            font-family: s.$font-text-bold;
         }
     }
 }

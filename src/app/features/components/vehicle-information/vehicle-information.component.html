@@ -1,45 +1,48 @@
-<form class="m-auto pb-5  pt-4" 
+<form class="m-auto pb-4  pt-4" 
  [formGroup]="formVehicle" (ngSubmit)="onSubmit()">
     <fieldset>
         <legend class="text-center fw-semibold w-100">Datos del vehículo</legend>
 
-        <div class="show-message text-center m-auto w-100">
-            <app-small-message [message]="'La carpeta de investigación es obligatoria. \n Coloca las placas o el número de serie como complemento*'" type="info" />
-        </div>
+        <div><span>Ingresa cualquiera de los siguientes datos para continuar:</span></div>
 
         <div class="groups">
             <div class="group">
-                <label for="folder">Carpeta de investigación*:</label>
-                <input type="text" id="folder" placeholder="Carpeta de investigación" [ngClass]="{ 'no-modify': isDataOwner }"
-                formControlName="folder" (paste)="onPasteFolder($event)" (input)="onInputFolder($event)">
-            </div>
-
-            <div class="group">
                 <label for="plate">Placa del vehículo (sin guiones ni espacios) (5-7 digitos):</label>
-                <input type="text" id="plate" placeholder="Placa del vehículo" [ngClass]="{ 'no-modify': isDataOwner }"
+                <input type="text" id="plate" placeholder="Placa del vehículo" [ngClass]="{ 'no-modify': disableFields }"
                 formControlName="plate" (paste)="onPaste($event)" (input)="onInput($event)">
             </div>
 
             <div class="group">
                 <label for="serial">Número de serie (17 digitos):</label>
-                <input type="text" id="serial" placeholder="Número de serie del vehículo" [ngClass]="{ 'no-modify': isDataOwner }"
+                <input type="text" id="serial" placeholder="Número de serie del vehículo" [ngClass]="{ 'no-modify': disableFields }"
                 formControlName="serial" (paste)="onPaste($event)" (input)="onInput($event)">
+            </div>
+
+            <div class="group">
+                <label for="folder">Carpeta de investigación*:</label>
+                <input type="text" id="folder" placeholder="Carpeta de investigación" [ngClass]="{ 'no-modify': disableFields }"
+                formControlName="folder" 
+                (paste)="onPasteFolder($event)" (input)="onInputFolder($event)">
             </div>
         </div>
     </fieldset>
 
     <!-- Botones -->
-    <div class="buttons d-flex w-100 mt-4">
-
+    <div class="buttons">
         @if (!showLoader) {
-            <button class="btn" [ngClass]="isDataOwner ? 'btn-block' : 'btn-outline-primary'"
-            type="submit" [disabled]="isDataOwner">
+            <button class="btn" [ngClass]="disableFields ? 'btn-block' : 'btn-outline-primary'"
+            type="submit" [disabled]="disableFields">
                 Verificar
             </button>
         } @else {
-            <app-btn-loader />
+            <button class="btn">
+                <app-btn-loader />
+            </button>
         }
 
+        <div class="text">
+            <span>* Indica la carpeta de investigación y complementa con la placa del vehículo o número de serie</span>
+        </div>
     </div>
 </form>
 

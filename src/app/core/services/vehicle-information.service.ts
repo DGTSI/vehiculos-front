@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { OwnerApiService } from '@core/api/owner-api.service';
 
 import * as ownerSignals from '@core/state/owner-data.signal';
+import { SweetAlert } from '@shared/utilities/sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +45,9 @@ export class VehicleInformationService {
         plate: ['', [Validators.minLength(5), Validators.maxLength(7), this.forbiddenCharactersValidator()]],
         serial: ['', [Validators.minLength(17), Validators.maxLength(17), this.forbiddenCharactersValidator()]],
       },
-      // {
-      //   validators: this.folderAndOneOfPlateOrSerial()
-      // }
+      {
+        validators: this.folderAndOneOfPlateOrSerial()
+      }
     );
   }
 
@@ -101,22 +103,17 @@ export class VehicleInformationService {
 
   // Deshabilitar campos
   public disableFileds(form: FormGroup): FormGroup {
-    form.get('folder')?.disable();
-    form.get('plate')?.disable();
-    form.get('serial')?.disable();
+    form.disable();
 
     return form;
   }
 
   // Deshabilita campos y redirije al formulario del propietario
   public nextStep(formVehicle: FormGroup): FormGroup {
-    ownerSignals.setShowFormUser(true);
+    ownerSignals.setDisableFormUser(false);
+    ownerSignals.setDisableFormVehicle(true);
     formVehicle = this.disableFileds(formVehicle);
-
-    setTimeout(() => {
-      const element = document.querySelector('#owner');
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }, 15);
+    SweetAlert.basic('Información del vehículo localizada\nIngrese sus datos de contacto', 'success');
 
     return formVehicle;
   }

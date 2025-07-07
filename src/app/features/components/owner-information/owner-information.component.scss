@@ -1,23 +1,33 @@
 @use '@style/index.scss' as s;
 
 form {
-    background: url(src/assets/img/fondo-crema-con-franja-izq.png);
-    background-repeat: no-repeat;
-    background-position: left;
-    background-size: cover;
+    background-color: white;
    
+    @include s.media-resolution(721px) {
+        border-radius: 0 0 2rem 2rem;
+    }
+
     fieldset {
+        @include s.media-resolution(721px) {
+            width: 90%;
+            margin: auto;
+        }
+        
         legend {
-            background-color: s.$secondary;
-            background-size: cover;
-            color: white;
+            border-top: 4px solid s.$bg;
+            border-bottom: 4px solid s.$bg;
+            width: 100%;
+            color: s.$primary;
             padding: .5rem 0;
-            width: 100vw;
         }
 
         .groups {
             width: 90dvw;
             margin: auto;
+
+            @include s.media-resolution(721px) {
+                width: 100%;
+            }
         }
     }
 
@@ -33,12 +43,22 @@ form fieldset .group {
     display: flex;
     flex-direction: column;
     gap: .3rem;
+    text-align: center;
+
+    @include s.media-resolution(721px) {
+        text-align: start;
+    }
 
     input {
         padding: .5rem;
         border-radius: .3rem;
         border: 1px solid s.$gray;
         text-transform: uppercase;
+        text-align: center;
+
+        @include s.media-resolution(721px) {
+            text-align: start;
+        }
     }
 
     
@@ -54,22 +74,14 @@ form fieldset .email {
     }
 }
 
-form {
-    .buttons {
-        justify-content: center;
+form fieldset .groups {
+        width: 95%;
         
         @include s.media-resolution(721px) {
-            justify-content: end;
-            padding: 0 2rem;
+            width: 100%;
         }
-        button {
-            padding: .5rem 2rem;
-        }
-    }
-}
 
-form fieldset .groups {
-    @include s.media-tablet {
+        @include s.media-tablet {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-areas: 
@@ -79,10 +91,10 @@ form fieldset .groups {
         "email email ."
         "cp . ."
         "state district municipality"
-        "street internal external"
+        "street external internal"
+        ". text ."
         ;
         gap: 0 1rem;
-        width: 95%;
     }
 
     @include s.media-desktop {
@@ -93,10 +105,9 @@ form fieldset .groups {
         "phone1 phone2 . ."
         "email email . ."
         "cp state district municipality"
-        "street internal external ."
+        "street external internal text"
         ;
         gap: 0 1rem;
-        width: 95%;
     }
 
     @include s.media-large-desktop {
@@ -106,10 +117,9 @@ form fieldset .groups {
         "name lastName1 lastName2 curp"
         "phone1 phone2 email email"
         "cp state district municipality"
-        "street internal external ."
+        "street external internal text"
         ;
         gap: 0 1rem;
-        width: 95%;
     }
 
     .name {
@@ -167,6 +177,25 @@ form fieldset .groups {
     .external {
         grid-area: external;
     }
+
+    .text {
+        grid-area: text;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            transform: scale(1);
+            color: rgb(104, 0, 0);
+            font-family: s.$font-text-bold;
+            cursor: pointer;
+            transition: transform .2s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
 }
 
 .images {
@@ -175,4 +204,8 @@ form fieldset .groups {
     .grecas {
         width: 100%;
     }
+}
+
+.no-modify {
+    cursor: no-drop;
 }
